@@ -15,6 +15,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_01_215102) do
   enable_extension "plpgsql"
 
   create_table "identities", force: :cascade do |t|
+    t.string "cid"
     t.string "email"
     t.string "encrypted_password"
     t.datetime "created_at", null: false

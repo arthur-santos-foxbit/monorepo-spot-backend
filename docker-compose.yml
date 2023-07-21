@@ -16,7 +16,7 @@ services:
       IDENTITY_DB_PORT: 5432
       AUTH_SECRET: secret
       AUTH_ALGORITHM: HS256
-      SANTA_CRUZ_AUTH_EXPIRATION: 3600
+      AUTH_EXPIRATION: 3600
     volumes:
       - ./identity_app:/identity_app
 

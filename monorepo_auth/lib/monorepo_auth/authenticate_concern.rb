@@ -11,8 +11,8 @@ module MonorepoAuth
         render(json: { error: exception.message }, status: 401)
       end
 
-      def dentity_cid
-        @dentity_cid
+      def identity_cid
+        @identity_cid
       end
 
       private
@@ -26,7 +26,7 @@ module MonorepoAuth
         ).call
 
         if service_response.success
-          @dentity_cid = service_response.data[:email]
+          @identity_cid = service_response.data[:cid]
         else
           raise AuthenticationError, service_response.error_message
         end

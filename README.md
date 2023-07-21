@@ -1,7 +1,6 @@
 # Monorepo rails - multiapps
 
 Funcionalidades:
-- Cadastro (Identity app - Signup)
 - Login (Identity app - Signin)
 
 Apps:
@@ -16,10 +15,7 @@ Bibliotecas:
 1. Rodar `docker compose up`
 2. consultar o container do identity_app `docker ps | grep identity_app`
 3. entrar no container `docker exec -it <container_id> bash`
-4. rodar `rails db:create db:migrate`
-5. consultar o container do withdraw_app `docker ps | grep withdraw_app`
-3. entrar no container `docker exec -it <container_id> bash`
-4. rodar `rails db:create:withdraw_app db:migrate:withdraw_app`
+4. rodar `rails db:create db:migrate db:seed`
 
 ### identity_app
 1. Rodar `docker compose up identity_app`

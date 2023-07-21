@@ -1,13 +1,7 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
-#   Character.create(name: "Luke", movie: movies.first)
-
 Identity.transaction do
-  1..9.each do |i|
+  ap 'Creating development identities...'
+
+  (1..9).each do |i|
     SignupService.new(
       {
         email: "email#{i}@email.com",
@@ -16,4 +10,14 @@ Identity.transaction do
       }
     ).call
   end
+
+  Identity.create!(
+    {
+      email: 'arthur.santos+pro.homolog@foxbit.com.br',
+      cid: '963945',
+      encrypted_password: 'a6895a4bf774da729976a4f0c6f409c7343839cc675cd7a004f5948fb933872a' # Imported from starfox stage
+    }
+  )
+
+  ap 'Development identities created!'
 end

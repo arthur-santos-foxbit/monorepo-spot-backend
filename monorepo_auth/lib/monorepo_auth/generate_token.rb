@@ -7,7 +7,7 @@ module MonorepoAuth
       @secret = params[:secret]
       @algorithm = params[:algorithm]
       @expiration = params[:expiration]
-      @ip = param[:ip]
+      @ip = params[:ip]
     end
 
     def call
@@ -27,6 +27,7 @@ module MonorepoAuth
       @payload = {
         cid: @cid,
         exp: timestamp + @expiration.to_i,
+        ip: @ip,
         timestamp:
       }
     end

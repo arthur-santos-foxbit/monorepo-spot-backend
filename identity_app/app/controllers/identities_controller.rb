@@ -3,18 +3,14 @@ require 'monorepo_auth'
 class IdentitiesController < ApplicationController
   include MonorepoAuth::AuthenticateConcern
 
-  before_action :authenticate!, only: %i[show authenticate]
+  before_action :authenticate!, only: %i[show]
 
   def show
-    render(json: identity_email)
-  end
-
-  def authenticate
-    render(json: { message: 'authenticated' })
+    render(json: Identity.find_by_cid(identity_cid))
   end
 
   def signin
-    service_response = SigninService.new(signin_params).call
+    service_response = SigninService.new(signin_params.merge(ip: request.remote_ip)).call
     if service_response.success
       render(json: service_response.data)
     else
@@ -40,6 +36,6 @@ class IdentitiesController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def signup_params
-    params.permit(:email, :password)
+    params.permit(:cid, :email, :password)
   end
 end

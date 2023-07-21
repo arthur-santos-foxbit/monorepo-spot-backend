@@ -1,6 +1,9 @@
-require 'bcrypt'
+# require 'bcrypt'
+require 'digest'
 
 class SignupService < SantaCruz::ApplicationService
+  include EncryptionHelper
+
   def initialize(params)
     super()
     @email = params[:email]
@@ -25,7 +28,11 @@ class SignupService < SantaCruz::ApplicationService
 
   private
 
+  # def encrypt_password
+  #   @encrypted_password = BCrypt::Password.create(@password)
+  # end
+
   def encrypt_password
-    @encrypted_password = BCrypt::Password.create(@password)
+    @encrypted_password = string_to_sha256(@password)
   end
 end

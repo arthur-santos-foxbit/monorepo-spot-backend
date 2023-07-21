@@ -6,7 +6,6 @@ Rails.application.routes.draw do
 
   scope '/identity' do
     get '/', to: 'identities#show'
-    get 'authenticate', to: 'identities#authenticate'
     post 'signin', to: 'identities#signin'
     post 'signup', to: 'identities#signup'
   end
