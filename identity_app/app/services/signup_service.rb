@@ -4,15 +4,16 @@ class SignupService < SantaCruz::ApplicationService
   def initialize(params)
     super()
     @email = params[:email]
+    @cid = params[:cid]
     @password = params[:password]
   end
 
   def call
-    validate_email
     encrypt_password
 
     identity = Identity.new(
       email: @email,
+      cid: @cid,
       encrypted_password: @encrypted_password
     )
 
@@ -26,9 +27,5 @@ class SignupService < SantaCruz::ApplicationService
 
   def encrypt_password
     @encrypted_password = BCrypt::Password.create(@password)
-  end
-
-  def validate_email
-    true
   end
 end

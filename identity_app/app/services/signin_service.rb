@@ -1,6 +1,6 @@
 class SigninService < SantaCruz::ApplicationService
-  SECRET = ENV['SANTA_CRUZ_AUTH_SECRET']
-  ALGORITHM = ENV['SANTA_CRUZ_AUTH_ALGORITHM']
+  SECRET = ENV['AUTH_SECRET']
+  ALGORITHM = ENV['AUTH_ALGORITHM']
   EXPIRATION = ENV['SANTA_CRUZ_AUTH_EXPIRATION']
 
   def initialize(params)
@@ -28,17 +28,17 @@ class SigninService < SantaCruz::ApplicationService
   end
 
   def generate_token
-    santa_cruz_auth_response = SantaCruzAuth::GenerateToken.new(
+    monorepo_auth_response = MonorepoAuth::GenerateToken.new(
       email: @identity.email,
       secret: SECRET,
       algorithm: ALGORITHM,
       expiration: EXPIRATION
     ).call
 
-    if santa_cruz_auth_response.success
-      @token = santa_cruz_auth_response.data[:token]
+    if monorepo_auth_response.success
+      @token = monorepo_auth_response.data[:token]
     else
-      raise santa_cruz_auth_response.error
+      raise monorepo_auth_response.error
     end
   end
 

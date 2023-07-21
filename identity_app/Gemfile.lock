@@ -1,7 +1,7 @@
 PATH
-  remote: ../santa_cruz_auth
+  remote: ../monorepo_auth
   specs:
-    santa_cruz_auth (1.0.0)
+    monorepo_auth (1.0.0)
       activesupport
       httparty
       jwt
@@ -198,7 +198,7 @@ DEPENDENCIES
   puma (~> 5.0)
   rails (~> 7.0.4, >= 7.0.4.3)
   santa_cruz!
-  santa_cruz_auth!
+  monorepo_auth!
   tzinfo-data
 
 RUBY VERSION

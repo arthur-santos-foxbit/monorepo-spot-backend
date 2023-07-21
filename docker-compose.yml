@@ -1,18 +1,6 @@
 version: "3.9"
 
 services:
-  price_app:
-    build:
-      context: .
-      dockerfile: price_app/Dockerfile
-    command: bundle exec rails s -p 3000 -b '0.0.0.0'
-    ports:
-      - "3000:3000"
-    environment:
-      APP_NAME: price_app
-    volumes:
-      - ./price_app:/price_app
-
   identity_app:
     build:
       context: .
@@ -26,32 +14,11 @@ services:
       APP_NAME: identity_app
       IDENTITY_DB_HOST: identity_database
       IDENTITY_DB_PORT: 5432
-      SANTA_CRUZ_AUTH_SECRET: secret
-      SANTA_CRUZ_AUTH_ALGORITHM: HS256
+      AUTH_SECRET: secret
+      AUTH_ALGORITHM: HS256
       SANTA_CRUZ_AUTH_EXPIRATION: 3600
     volumes:
       - ./identity_app:/identity_app
-    
-  withdraw_app:
-    build:
-      context: .
-      dockerfile: withdraw_app/Dockerfile
-    command: bundle exec rails s -p 3002 -b '0.0.0.0'
-    ports:
-      - "3002:3002"
-    depends_on:
-      - withdraw_database
-      - identity_app
-    environment:
-      APP_NAME: withdraw_app
-      WITHDRAW_DB_HOST: withdraw_database
-      WITHDRAW_DB_PORT: 5432
-      SANTA_CRUZ_AUTH_SECRET: secret
-      SANTA_CRUZ_AUTH_ALGORITHM: HS256
-      SANTA_CRUZ_AUTH_EXPIRATION: 3600
-      SANTA_CRUZ_GET_IDENTITY_URL: http://identity_app:3001/identity
-    volumes:
-      - ./withdraw_app:/withdraw_app
 
   identity_database:
     image: postgres
@@ -63,19 +30,6 @@ services:
     volumes:
       - identity_database:/var/lib/postgresql/data
 
-  withdraw_database:
-    image: postgres
-    environment:
-      POSTGRES_USER: user
-      POSTGRES_PASSWORD: password
-    ports:
-      - "5436:5432"
-    volumes:
-      - withdraw_database:/var/lib/postgresql/data
-
 volumes:
   identity_database:
-  withdraw_database:
-  price_app:
   identity_app:
-  withdraw_app:

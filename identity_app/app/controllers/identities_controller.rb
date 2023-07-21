@@ -1,7 +1,7 @@
-require 'santa_cruz_auth'
+require 'monorepo_auth'
 
 class IdentitiesController < ApplicationController
-  include SantaCruzAuth::AuthenticateConcern
+  include MonorepoAuth::AuthenticateConcern
 
   before_action :authenticate!, only: %i[show authenticate]
 

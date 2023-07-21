@@ -9,7 +9,7 @@ WORKDIR /identity_app
 # COPY santa_cruz/* /santa_cruz
 COPY ./identity_app /identity_app
 COPY ./santa_cruz /santa_cruz
-COPY ./santa_cruz_auth /santa_cruz_auth
+COPY ./monorepo_auth /monorepo_auth
 
 # Instale as dependências do sistema necessárias para o aplicativo Rails
 RUN apt-get update -qq && apt-get install -y build-essential libpq-dev nodejs
